@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { useAuthUser } from "../../context/AuthUserContext.jsx";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Suspense } from "react";
 
 export default function Signin() {
   const router = useRouter();
@@ -66,6 +67,7 @@ export default function Signin() {
   }
 
   return (
+    <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
     <div className="flex items-center justify-center min-h-[100vh] bg-[url('/tajmahal_bg.jpg')] bg-cover bg-center px-6">
       <div className="rounded-3xl shadow-2xl border border-white p-10 w-full max-w-md bg-white/80 text-center animate-fade-in">
         <h3 className="text-5xl font-extrabold mb-8">Welcome Back</h3>
@@ -129,5 +131,6 @@ export default function Signin() {
         </p>
       </div>
     </div>
+    </Suspense>
   );
 }
