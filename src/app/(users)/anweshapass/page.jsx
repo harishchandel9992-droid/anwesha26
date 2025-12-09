@@ -2,9 +2,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import styles from './anweshapass.module.css'
 import Image from 'next/image'
-import { useAuthUser } from "../../context/AuthUserContext";
+import { useAuthUser } from "../../../context/AuthUserContext";
 import { useRouter } from 'next/navigation'
-import { proniteRegistration } from '../../components/Event Registration/proniteRegistration'
+import { proniteRegistration } from '../../../components/Event Registration/proniteRegistration'
 
 const FireSkullHeadLeft = () => {
     return (

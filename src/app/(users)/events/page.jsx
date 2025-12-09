@@ -6,11 +6,11 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import Card from '../../components/EventItem/index.js'
+import Card from '../../../components/EventItem/index.js'
 // import { useNavigate } from 'react-router-dom';
 // import Modal from '../components/EventItem/Modal.js'
-import EventItem from '../../components/EventItem'
-import Modal from '../../components/BigModal/index.js'
+import EventItem from '../../../components/EventItem/index.js'
+import Modal from '../../../components/BigModal/index.js'
 
 
 
@@ -44,7 +44,7 @@ const SponsorsSlider = ({ images, animation_duration = -1 }) => {
                     animationDuration: `${duration}s`,
                     '--width': width
                 }}>
-                    <Image src={src} width={width} height={heigth} />
+                    <Image src={src} width={width} height={heigth} alt="image" />
                 </div>
             )
         }

@@ -3,7 +3,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import GreetingLottie from "../../components/displaylottie";
+import GreetingLottie from "../../../components/displaylottie";
 import styles from "./campusamb.module.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";

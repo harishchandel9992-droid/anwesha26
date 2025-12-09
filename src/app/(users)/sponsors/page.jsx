@@ -875,7 +875,7 @@ const oursponsors = () => {
                                                                           220
                                                                       }
                                                                       alt={
-                                                                          sponsor.name
+                                                                          sponsor?.name || "image"
                                                                       }
                                                                   />
                                                               </div>

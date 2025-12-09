@@ -6,7 +6,7 @@ import Image from 'next/image'
 // import Link from 'next/link'
 // import { Josefin_Sans } from '@next/font/google'
 // import HomeBackgroundAnimation from '../components/Rive/homeBackgrounAnim'
-import styles from '../styles/homepage.module.css'
+import styles from '../../styles/homepage.module.css'
 import SoundPlayer from './jumscare/jumscare_sound'
 import VideoPlayer from './jumscare/jumscare'
 // import DisplayRiveAnwesha from '../components/Rive/DisplayRiveAnwesha'
@@ -23,7 +23,7 @@ import VideoPlayer from './jumscare/jumscare'
 // import 'react-awesome-slider/dist/styles.css'
 // import { motion } from 'framer-motion'
 import CountdownTimer from './jumscare/jumscaretimeout'
-import HeroSection from '../components/Hero/Hero'
+import HeroSection from '../../components/Hero/Hero'
 // import Spline from '@splinetool/react-spline';
 import { useRouter } from 'next/navigation'
 
@@ -324,9 +324,8 @@ const EventSlider = ({
             imageRefs.current[prevprev].current.style.zIndex = '1'
             imageRefs.current[
                 prevprev
-            ].current.style.transform = `translateY(-50%) translateX(calc(-50% - ${
-                2 * offset
-            }px))`
+            ].current.style.transform = `translateY(-50%) translateX(calc(-50% - ${2 * offset
+                }px))`
             imageRefs.current[prev].current.style.zIndex = '2'
             imageRefs.current[
                 prev
@@ -342,9 +341,8 @@ const EventSlider = ({
             imageRefs.current[nextnext].current.style.zIndex = '-1'
             imageRefs.current[
                 nextnext
-            ].current.style.transform = `translateY(-50%) translateX(calc(-50% + ${
-                2 * offset
-            }px))`
+            ].current.style.transform = `translateY(-50%) translateX(calc(-50% + ${2 * offset
+                }px))`
         } else if (
             currIndex === oldIndex - 1 ||
             (currIndex === images.length - 1 && oldIndex === 0)
@@ -353,9 +351,8 @@ const EventSlider = ({
             imageRefs.current[prevprev].current.style.zIndex = '-1'
             imageRefs.current[
                 prevprev
-            ].current.style.transform = `translateY(-50%) translateX(calc(-50% - ${
-                2 * offset
-            }px))`
+            ].current.style.transform = `translateY(-50%) translateX(calc(-50% - ${2 * offset
+                }px))`
             imageRefs.current[prev].current.style.zIndex = '2'
             imageRefs.current[
                 prev
@@ -371,9 +368,8 @@ const EventSlider = ({
             imageRefs.current[nextnext].current.style.zIndex = '1'
             imageRefs.current[
                 nextnext
-            ].current.style.transform = `translateY(-50%) translateX(calc(-50% + ${
-                2 * offset
-            }px))`
+            ].current.style.transform = `translateY(-50%) translateX(calc(-50% + ${2 * offset
+                }px))`
             imageRefs.current[nextnextnext].current.style.zIndex = '-1'
         }
         setOldIndex(currIndex)
@@ -429,8 +425,8 @@ const EventSlider = ({
                             index === currIndex
                                 ? '2'
                                 : index === prev || index === next
-                                ? '1'
-                                : '-1',
+                                    ? '1'
+                                    : '-1',
                         position: 'absolute',
                         left: '50%',
                         top: '50%',
@@ -439,13 +435,11 @@ const EventSlider = ({
                         transform:
                             index == currIndex
                                 ? `translateY(-50%) translateX(-50%)`
-                                : `translateY(-50%) translateX(calc(-50% ${
-                                      currIndex > index ? '-' : '+'
-                                  } min(50vw - 200px, ${
-                                      (currIndex > index
-                                          ? currIndex - index
-                                          : index - currIndex) * offset
-                                  }px)))`,
+                                : `translateY(-50%) translateX(calc(-50% ${currIndex > index ? '-' : '+'
+                                } min(50vw - 200px, ${(currIndex > index
+                                    ? currIndex - index
+                                    : index - currIndex) * offset
+                                }px)))`,
                         transition:
                             'transform .15s linear, width .15s linear, height .15s linear', // Smooth transition
                     }}
@@ -483,14 +477,13 @@ const SponsorsSlider = ({ images, animation_duration = -1 }) => {
                         position: 'absolute',
                         left: '100%',
                         // zIndex: 8,
-                        animationDelay: `${
-                            (duration / images.length) * index
-                        }s`,
+                        animationDelay: `${(duration / images.length) * index
+                            }s`,
                         animationDuration: `${duration}s`,
                         '--width': width,
                     }}
                 >
-                    <Image src={src} width={width} height={heigth} />
+                    <Image src={src} width={width} height={heigth} alt="Image" />
                 </div>
             ))}
         </div>
@@ -530,15 +523,13 @@ const ImagesSlider = ({
             imageRefs[prevprevprev].current.style.zIndex = '-1'
             imageRefs[
                 prevprevprev
-            ].current.style.transform = `translateX(calc(-50% + ${
-                3 * offset
-            }px))`
+            ].current.style.transform = `translateX(calc(-50% + ${3 * offset
+                }px))`
             imageRefs[prevprev].current.style.zIndex = '4'
             imageRefs[
                 prevprev
-            ].current.style.transform = `translateX(calc(-50% - ${
-                2 * offset
-            }px))`
+            ].current.style.transform = `translateX(calc(-50% - ${2 * offset
+                }px))`
             imageRefs[prev].current.style.zIndex = '3'
             imageRefs[
                 prev
@@ -554,9 +545,8 @@ const ImagesSlider = ({
             imageRefs[nextnext].current.style.zIndex = '1'
             imageRefs[
                 nextnext
-            ].current.style.transform = `translateX(calc(-50% + ${
-                2 * offset
-            }px))`
+            ].current.style.transform = `translateX(calc(-50% + ${2 * offset
+                }px))`
         } else if (
             currIndex === oldIndex - 1 ||
             (currIndex === images.length - 1 && oldIndex === 0)
@@ -565,9 +555,8 @@ const ImagesSlider = ({
             imageRefs[prevprev].current.style.zIndex = '1'
             imageRefs[
                 prevprev
-            ].current.style.transform = `translateX(calc(-50% - ${
-                2 * offset
-            }px))`
+            ].current.style.transform = `translateX(calc(-50% - ${2 * offset
+                }px))`
             imageRefs[prev].current.style.zIndex = '2'
             imageRefs[
                 prev
@@ -583,15 +572,13 @@ const ImagesSlider = ({
             imageRefs[nextnext].current.style.zIndex = '4'
             imageRefs[
                 nextnext
-            ].current.style.transform = `translateX(calc(-50% + ${
-                2 * offset
-            }px))`
+            ].current.style.transform = `translateX(calc(-50% + ${2 * offset
+                }px))`
             imageRefs[nextnextnext].current.style.zIndex = '-1'
             imageRefs[
                 nextnextnext
-            ].current.style.transform = `translateX(calc(-50% - ${
-                3 * offset
-            }px))`
+            ].current.style.transform = `translateX(calc(-50% - ${3 * offset
+                }px))`
         }
         setOldIndex(currIndex)
     }, [currIndex])
@@ -645,13 +632,11 @@ const ImagesSlider = ({
                     style={{
                         position: 'absolute',
                         left: '50%',
-                        transform: `translateX(calc(-50% ${
-                            currIndex > index ? '-' : '+'
-                        } ${
-                            (currIndex > index
+                        transform: `translateX(calc(-50% ${currIndex > index ? '-' : '+'
+                            } ${(currIndex > index
                                 ? currIndex - index
                                 : index - currIndex) * offset
-                        }px))`,
+                            }px))`,
                         transition: 'transform 0.35s ease-in-out', // Smooth transition
                     }}
                 />
@@ -929,6 +914,7 @@ const Home = () => {
                             src={'/pics/hero_image-export.svg'}
                             width={1047}
                             height={589}
+                            alt="Image"
                         />
                         {/* <div style={{height: 570, width: 570, zIndex: 9, overflow: 'hidden', borderRadius: "9999px"}}>
                         <div style={{height: 589, width: 589}}>
@@ -944,8 +930,8 @@ const Home = () => {
                                 styles.sexy_button_small
                             )}
                             onClick={() => {
-                                    router.push('/register')
-                                }
+                                router.push('/register')
+                            }
                             }
                         >
                             REGISTER
@@ -1095,7 +1081,7 @@ const Home = () => {
                 </section>
 
                 {/* The Aftermovie */}
-                <section  className={styles.aftermovie}>
+                <section className={styles.aftermovie}>
                     <div className={styles.sexy_title}>
                         <h2>Anwesha 2024: The Aftermovie</h2>
                         <h3>Last Year's Magic in 3 Minutes</h3>
@@ -1137,7 +1123,7 @@ const Home = () => {
                 </section>
 
                 {/* CTA or This Year's Theme */}
-                <section  className={styles.cta}>
+                <section className={styles.cta}>
                     <div className={styles.sexy_title}>
                         <h2>This Year's Theme</h2>
                         <h3>Echoes Of the Abyss</h3>
@@ -1150,6 +1136,7 @@ const Home = () => {
                                     src={'/pics/Mascot.png'}
                                     width={474.386}
                                     height={474.386}
+                                    alt="Mascot.png"
                                 />
                             </div>
                         </div>
@@ -1187,7 +1174,7 @@ const Home = () => {
 
                 {/* Sponsors */}
 
-                <section  className={styles.sponsors}>
+                <section className={styles.sponsors}>
                     <div className={styles.sponsors_title}>
                         <h2>Our Proud Sponsors</h2>
                         <h3>Strengthening the Vision Together</h3>
@@ -1198,19 +1185,26 @@ const Home = () => {
                 </section>
 
                 {/* NewsLetter */}
-                <section section className={styles.newsletter}>
-                    <p style={{ color: 'white' }}>
+                <section className={styles.newsletter}>
+                    <p style={{ color: "white" }}>
                         Subscribe to our newsletter
                     </p>
+
                     <iframe
                         src="https://embeds.beehiiv.com/255bda27-7d9d-4f91-9f9c-edca5ce5d90a?slim=true"
                         data-test-id="beehiiv-embed"
                         height="52"
-                        frameborder="0"
+                        frameBorder="0"
                         scrolling="no"
-                        // style="margin: 0; border-radius: 0px !important; background-color: transparent;"
+                        style={{
+                            margin: 0,
+                            borderRadius: "0px",
+                            backgroundColor: "transparent",
+                            width: "100%",
+                        }}
                     />
                 </section>
+
                 {loadimg && (
                     <img width={200} src="/pics/jump.gif" alt="Scary GIF" />
                 )}

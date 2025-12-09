@@ -17,7 +17,7 @@ export function AuthUserProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // listen for firebase user change
+  // 🔹 Listen for login/logout state
   useEffect(() => {
     return onAuthStateChanged(auth, async (user) => {
       if (!user) {
@@ -30,12 +30,13 @@ export function AuthUserProvider({ children }) {
       const snap = await getDoc(ref);
 
       if (snap.exists()) {
-        setCurrentUser(snap.data());
+        setCurrentUser(snap.data()); // includes role from Firestore
       } else {
-        // fallback minimal user
+        // fallback minimal user (should not normally happen)
         setCurrentUser({
           uid: user.uid,
           email: user.email,
+          role: "user",
           emailVerified: user.emailVerified,
           status: "1",
         });
@@ -45,16 +46,18 @@ export function AuthUserProvider({ children }) {
     });
   }, []);
 
-  // register
+  // 🔹 REGISTER USER
   const registerUser = async (email, password) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const uid = res.user.uid;
 
+      // ⭐ Default role assigned as "user"
       const userDoc = {
         uid,
         email,
-        emailVerified: true,
+        role: "user",
+        emailVerified: res.user.emailVerified || false,
         status: "1",
         anweshaId: null,
         createdAt: Date.now(),
@@ -67,7 +70,6 @@ export function AuthUserProvider({ children }) {
 
       await setDoc(doc(db, "users", uid), userDoc);
       setCurrentUser(userDoc);
-      await auth.currentUser?.reload();
 
       toast.success("Account Created!");
       return userDoc;
@@ -83,28 +85,29 @@ export function AuthUserProvider({ children }) {
     }
   };
 
-  // login
+  // 🔹 LOGIN USER
   const loginUser = async (email, password) => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
       const firebaseUser = res.user;
 
-      await firebaseUser.reload(); // ensure fresh state
+      await firebaseUser.reload();
 
       const ref = doc(db, "users", firebaseUser.uid);
       const snap = await getDoc(ref);
 
       if (!snap.exists()) {
-        toast.error("User record not found. Contact Support.");
+        toast.error("User record missing!");
         throw new Error("Firestore user missing");
       }
 
       const userData = snap.data();
 
       if (userData.status !== "successful") {
-        throw new Error("Please complete registration");
+        throw new Error("Please complete registration first.");
       }
 
+      // sync verified status if email is verified
       if (firebaseUser.emailVerified) {
         await updateDoc(ref, { emailVerified: true });
       }
@@ -120,7 +123,7 @@ export function AuthUserProvider({ children }) {
     }
   };
 
-  // logout
+  // 🔹 LOGOUT
   const logoutUser = async () => {
     await signOut(auth);
     localStorage.removeItem("uid");
@@ -128,19 +131,16 @@ export function AuthUserProvider({ children }) {
     toast.success("Logged Out");
   };
 
-  // update firestore user
+  // 🔹 UPDATE USER FIRESTORE DATA
   const updateUser = async (uid, newData) => {
     await updateDoc(doc(db, "users", uid), newData);
 
-    setCurrentUser((prev) => {
-      if (!prev) return newData;
-      return { ...prev, ...newData };
-    });
-
+    // update React state
+    setCurrentUser((prev) => ({ ...prev, ...newData }));
     return { ...currentUser, ...newData };
   };
 
-  // complete registration + assign AnweshaId
+  // 🔹 FINALIZE REGISTRATION
   const finalizeRegistration = async (uid, formData = {}) => {
     const anweshaId = `ANW-MUL-${Math.floor(100000 + Math.random() * 900000)}`;
 
@@ -170,5 +170,5 @@ export function AuthUserProvider({ children }) {
   );
 }
 
-// hook
+// 🔹 custom hook
 export const useAuthUser = () => useContext(AuthContext);

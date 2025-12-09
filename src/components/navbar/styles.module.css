@@ -278,3 +278,12 @@
         display: block !important;
     }
 }
+
+.iconBtn {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.iconBtn:hover {
+  filter: drop-shadow(0 0 4px #50ff00);
+}

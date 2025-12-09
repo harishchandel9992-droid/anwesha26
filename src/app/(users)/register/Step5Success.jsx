@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAuthUser } from "../../context/AuthUserContext";
+import { useAuthUser } from "../../../context/AuthUserContext";
 import { useRouter } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
 

@@ -1,10 +1,10 @@
 @font-face {
   font-family: "BroadwayShadow";
-  src: url("../../styles/fonts/BroadwayShadow.ttf");
+  src: url("../../../styles/fonts/BroadwayShadow.ttf");
 }
 @font-face {
   font-family: "popinsBold";
-  src: url("../../styles/fonts/Poppins-SemiBold.ttf");
+  src: url("../../../styles/fonts/Poppins-SemiBold.ttf");
 }
 
 .anwesha_bg_img {

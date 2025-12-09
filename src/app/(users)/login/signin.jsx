@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
-import { useAuthUser } from "../../context/AuthUserContext.jsx";
+import { useAuthUser } from "../../../context/AuthUserContext.jsx";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Suspense } from "react";
 

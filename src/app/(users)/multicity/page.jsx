@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Head from 'next/head'
 import { useState } from "react"
-import MulticityItem from '../../components/MulticityItem/index'
+import MulticityItem from '../../../components/MulticityItem/index'
 // import MulticityItem from './MulticityItem'
 
 import { useAuthUser } from "@/context/AuthUserContext"
