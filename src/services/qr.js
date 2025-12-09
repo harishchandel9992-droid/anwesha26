@@ -30,7 +30,7 @@ export const generateQrPayload = (user) => {
 };
 
 // Verify QR payload
-export const verifyQrPayload = (qrString) => {
+export const  decodeQrPayload = (qrString) => {
   if (!qrString) return false;
 
   const parts = qrString.split("|");

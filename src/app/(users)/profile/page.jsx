@@ -12,11 +12,11 @@ import { db } from "@/lib/firebaseConfig";
 import { updateDoc, doc } from "firebase/firestore";
 
 import { generateQrPayload } from "@/services/qr";
+import { generatePdf } from "@/services/pdf";
 import styles from "./profile.module.css";
 
 export default function ProfileDashboard() {
   const { currentUser, loading } = useAuthUser();
-
   const [qrValue, setQrValue] = useState("");
   const qrRef = useRef(null);
   const router = useRouter();
@@ -62,77 +62,86 @@ export default function ProfileDashboard() {
 
   return (
     <div className={styles.mainContainer}>
+      {/* Header */}
       <div className={styles.welcome}>WELCOME BACK!</div>
 
       <div className={styles.subContainer}>
-        {/* Avatar + Name + ANW ID + QR */}
-        <div className={styles.idandqr}>
-          <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-            {/* Avatar */}
+        {/* Header Section Left (Avatar, Name, ID) and QR Right */}
+        <div className={styles.profileHeader}>
+          {/* Avatar + Name */}
+          <div className={styles.leftSide}>
             <div className={styles.userImage}>
               <img src="/pics/circle_greenNobg.png" width={180} height={180} alt="bg" />
               <img src="/pics/mascot 2.png" width={130} height={130} alt="mascot" />
             </div>
 
-            {/* Name + ANW ID */}
             <div>
-              <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}>
-                {isEditing ? (
+              {/* Name + Edit Row */}
+              <div className={styles.nameBlock}>
+                <h1 className={styles.anwesha_username}>{name}</h1>
+
+                <button
+                  onClick={() => setIsEditing(!isEditing)}
+                  className={styles.iconBtn}
+                >
+                  <motion.div whileTap={{ scale: 0.8 }}>
+                    <img
+                      src={isEditing ? "/assets/tick.svg" : "/edit.svg"}
+                      width={22}
+                      height={22}
+                      alt="edit"
+                    />
+                  </motion.div>
+                </button>
+
+                {isEditing && (
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && setIsEditing(false)}
                     autoFocus
-                    style={{
-                      outline: "none",
-                      border: "2px solid lightgray",
-                      padding: "10px",
-                      fontSize: "24px",
-                      borderRadius: "4px",
-                      margin: "10px 0",
-                    }}
+                    className={styles.nameEditInput}
                   />
-                ) : (
-                  <h1 className={styles.anwesha_username}>{name}</h1>
                 )}
-
-                <button onClick={() => setIsEditing(!isEditing)} className={styles.copy}>
-                  <motion.div whileTap={{ scale: 0.8 }}>
-                    <img src={isEditing ? "/assets/tick.svg" : "/edit.svg"} width={20} height={20} alt="edit" />
-                  </motion.div>
-                </button>
               </div>
 
-              {/* Anwesha ID */}
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <h1 className={styles.anwesha_id}>{currentUser.anweshaId}</h1>
+
+              {/* Anwesha ID Block */}
+              <div className={styles.idBlock}>
+                <span className={styles.anwesha_id}>{currentUser.anweshaId}</span>
 
                 <button
-                  className={styles.copy}
+                  className={styles.iconBtn}
                   onClick={() => {
                     navigator.clipboard.writeText(currentUser.anweshaId);
                     toast.success("Copied!");
                   }}
                 >
                   <motion.div whileTap={{ scale: 0.8 }}>
-                    <Image src="/copy.svg" width={20} height={20} alt="copy" />
+                    <Image src="/copy.svg" width={22} height={22} alt="copy" />
                   </motion.div>
                 </button>
               </div>
+
             </div>
           </div>
 
-          {/* QR RIGHT */}
-          <div className={styles.qrcode}>
+          {/* QR Area */}
+          <div className={styles.rightSide}>
             {qrValue ? (
-              <QRCode value={qrValue} size={200} />
+              <QRCode value={qrValue} size={170} />
             ) : (
-              <img src="/pics/pass.png" width={200} height={200} alt="placeholder" />
+              <button className={styles.qrGenerateBtn} onClick={handleShowQr}>
+                View Entry Pass
+              </button>
             )}
           </div>
         </div>
 
-        {/* DETAILS */}
+        {/* Divider */}
+        <hr className={styles.divider} />
+
+        {/* User Details */}
         <div className={styles.userDetails}>
           <div>
             <h1 className={styles.userDetailsHeading}>Mail ID</h1>
@@ -150,37 +159,46 @@ export default function ProfileDashboard() {
           </div>
         </div>
 
-        {/* Center Button */}
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-          <button
-            onClick={handleShowQr}
-            style={{
-              width: "200px",
-              fontSize: "1.4rem",
-              fontWeight: "bold",
-              padding: "10px 0",
-              borderRadius: "10px",
-              backgroundImage: "url('/bg_2_cropped.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "bottom",
-              color: "white",
-              boxShadow: "0px 4px 8px rgba(0,0,0,0.4)",
-            }}
-          >
-            View Entry Pass
-          </button>
+        {/* Registered Events Section */}
+        {Array.isArray(currentUser.events) && currentUser.events.length > 0 && (
+          <section className={styles.eventSection}>
+
+            {/* Heading now larger + bold */}
+            <h2 className={styles.sectionTitle}>Registered Events</h2>
+
+            <div className={styles.eventGrid}>
+              {currentUser.events.map((event, index) => (
+                <div className={styles.eventCard} key={index}>
+
+                  {/* Inline on Desktop — stacked on Phone */}
+                  <div className={styles.eventRow}>
+                    <p><strong>Event ID:</strong> {event.eventId}</p>
+                    <p><strong>Team ID:</strong> {event.teamId}</p>
+                    <p><strong>Payment ID:</strong> {event.paymentId}</p>
+                    <p><strong>Amount:</strong> ₹{event.amount}</p>
+                  </div>
+
+                  {event.paymentId && (
+                    <button
+                      onClick={() => generatePdf(currentUser, event, qrRef)}
+                      className={styles.eventButton}
+                    >
+                      Download Receipt
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Hidden QR for PDF Rendering */}
+        <div ref={qrRef} style={{ position: "absolute", opacity: 0, pointerEvents: "none" }}>
+          {qrValue && <QRCode value={qrValue} size={150} />}
         </div>
 
-        {/* Accommodation Notice */}
-        <h2
-          style={{
-            color: "white",
-            fontWeight: "normal",
-            textAlign: "center",
-            letterSpacing: "1px",
-            marginTop: "30px",
-          }}
-        >
+        {/* Accommodation Info */}
+        <h2 className={styles.accommodationText}>
           To seek accommodation, fill this&nbsp;
           <a
             href="https://forms.gle/WjTuyC2gR8mHYGzA6"

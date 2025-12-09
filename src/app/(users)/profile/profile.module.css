@@ -213,3 +213,220 @@
         font-size: 16px;
     }
 }
+.profileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+.leftSide {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rightSide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qrGenerateBtn {
+  background: #41d7b7;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.qrGenerateBtn:hover {
+  background: #095db7;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.3);
+  margin: 15px 0;
+}
+.sectionTitle {
+  font-family: 'Anavio Small Capitals W01 Bold';
+  font-size: 24px;
+  color: white;
+  margin: 15px 0 10px;
+  border-left: 3px solid white;
+  padding-left: 10px;
+}
+
+.detailsBlock {
+  padding: 10px 20px;
+}
+
+.qrCard {
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  text-align: center;
+}
+
+.qrLabel {
+  color: white;
+  font-family: 'Laila-Bold';
+  margin-top: 6px;
+  font-size: 16px;
+}
+
+/* Event grid */
+.eventGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 10px 5px;
+}
+
+
+.eventCard {
+  background: rgba(255,255,255,0.15);
+  padding: 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  color: white;
+  font-family: 'Laila';
+}
+
+.eventButton {
+  margin-top: 10px;
+  background: #41d7b7;
+  padding: 8px 12px;
+  color: white;
+  border-radius: 6px;
+  font-family: 'Laila-Bold';
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.eventButton:hover {
+  background: #095db7;
+}
+
+.sectionTitle {
+  font-family: 'Anavio Small Capitals W01 Bold';
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin: 20px 0 12px;
+  text-transform: uppercase;
+  border-left: 5px solid white;
+  padding-left: 12px;
+  letter-spacing: 2px;
+}
+
+/* Responsive card */
+.eventCard {
+  background: rgba(255,255,255,0.12);
+  padding: 15px 18px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  color: white;
+  font-family: 'Laila';
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Event row layout → desktop inline */
+.eventRow {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.eventRow p {
+  margin: 0;
+  font-size: 16px;
+  font-family: 'Laila';
+  white-space: nowrap;
+}
+
+/* Keep invoice button aligned */
+.eventButton {
+  margin-top: 8px;
+  background: #41d7b7;
+  padding: 6px 12px;
+  color: white;
+  border-radius: 6px;
+  font-family: 'Laila-Bold';
+  cursor: pointer;
+  transition: 0.2s;
+  align-self: flex-start;
+}
+
+.eventButton:hover {
+  background: #095db7;
+}
+
+/* Mobile responsive → column layout */
+@media (max-width: 600px) {
+  .eventRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Center accommodation */
+.accommodationText {
+  margin-top: 25px;
+  text-align: center;
+  color: white;
+  font-family: 'Laila';
+  font-size: 18px;
+}
+
+/* Name block alignment */
+.nameBlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+/* Anwesha ID block alignment */
+.idBlock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* Editable input looks neat */
+.nameEditInput {
+  outline: none;
+  border: 2px solid rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 22px;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+/* Icon buttons spacing */
+.iconBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: 0.2s;
+}
+
+.iconBtn:hover {
+  filter: drop-shadow(0 0 6px #50ff00);
+}
