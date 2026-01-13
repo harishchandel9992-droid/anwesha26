@@ -1285,8 +1285,9 @@ export default function Page() {
     }}>
       {/* The actual text content */}
       <div className="maintenance-container">
-        <h1 className="maintenance-text">SITE UNDER MAINTENANCE</h1>
-        <p className="sub-text">We're fine-tuning things for a better experience. Stay tuned!</p>
+        {/* <h1 className="maintenance-text">SITE UNDER MAINTENANCE</h1> */}
+        <h1 className="maintenance-text">WEBSITE INTO THE ABYSS</h1>
+        <p className="sub-text">We're preparing for the Chaos!!!</p>
       </div>
 
       <style jsx>{`
